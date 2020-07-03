@@ -190,7 +190,7 @@ as the pyenv version then also return nil. This works around https://github.com/
          (module (plist-get conf :module)))
 
     (plist-put conf :program-to-start
-               (format "%s%s -m ptvsd --wait --host %s --port %s %s %s %s"
+               (format "%s%s -m debugpy --listen %s:%s --wait-for-client %s %s %s"
                        (or dap-python-terminal "")
                        (shell-quote-argument python-executable)
                        host
@@ -215,7 +215,7 @@ as the pyenv version then also return nil. This works around https://github.com/
          (module (plist-get conf :module)))
 
     (plist-put conf :program-to-start
-               (format "%s%s -m ptvsd --wait --host %s --port %s %s %s %s"
+               (format "%s%s -m ptvsd listen %s:%s --wait-for-client %s %s %s"
                        (or dap-python-terminal "")
                        (shell-quote-argument python-executable)
                        host
@@ -238,7 +238,7 @@ as the pyenv version then also return nil. This works around https://github.com/
                                    :cwd nil
                                    :module nil
                                    :program nil
-                                   :request "launch"
+                                   :request "attach"
                                    :name "Python :: Run file (buffer)"))
 
 (dap-register-debug-template "Python :: Run pytest (buffer)"
